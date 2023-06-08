@@ -33,7 +33,8 @@ public class ServiceLocationConfig {
     }
 
     public ServiceLocationConfig(Collection<String> locationsAsString) {
-        this.locations = locationsAsString.stream().map(Location::new).collect(Collectors.toList());
+        this.locations = locationsAsString.stream().map(s->s.split("\\,"))
+                .flatMap(Stream::of).map(Location::new).collect(Collectors.toList());
     }
 
     public Collection<Location> getLocations() {
